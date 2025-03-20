@@ -22,3 +22,5 @@ export TC_LLM_KEY=
 
 ## Use
 ![](img/demo1.jpg)
+
+## Give me star 🌟！ Please!

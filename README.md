@@ -1,16 +1,16 @@
 
-# Translate-Cli
+## Translate-Cli
 
 English | [中文](README_ZH_CN.md)
 
 Execute commands and use LLM to translate output.
 
 
-### Download
+## Download
 - download program from `relase` , rename as `tc`, set as global envirenment.
 - Or if you are a gopher, just `go install github.com/NezhaFan/translate-cli@latest` and `mv $GOPATH/bin/translate-cli $GOPATH/bin/tc`
 
-### Config
+## Config
 set env (for example in mac)
 ```conf
 export TC_LANG=Chinese #Translated language
@@ -20,5 +20,8 @@ export TC_LLM_MODEL=qwen2.5:3b #Use small model as possible
 export TC_LLM_KEY=
 ```
 
-# Use
+## Use
 ![](img/demo1.jpg)
+
+
+## 可怜可怜孩子吧，给个🌟再走。
