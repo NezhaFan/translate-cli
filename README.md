@@ -1,3 +1,4 @@
+![](img/demo1.jpg)
 
 ## Translate-Cli
 
@@ -20,8 +21,4 @@ export TC_LLM_MODEL=qwen2.5:3b #Use small model as possible
 export TC_LLM_KEY=
 ```
 
-## Use
-![](img/demo1.jpg)
-
-
-## 可怜可怜孩子吧，给个🌟再走。
+## Give me star 🌟！ Please!

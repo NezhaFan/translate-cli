@@ -1,3 +1,4 @@
+![](img/demo1.jpg)
 
 [English](README.md) | 中文
 
@@ -20,7 +21,4 @@ export TC_LLM_MODEL=qwen2.5:3b #使用较小的模型速度快
 export TC_LLM_KEY=
 ```
 
-## Use
-![](img/demo1.jpg)
-
-## Give me star 🌟！ Please!
+## 可怜可怜孩子，给个🌟再走吧...
