@@ -1,3 +1,4 @@
+//go:generate go build -o tc
 package main
 
 import (
@@ -7,7 +8,8 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
-	"tc/model"
+
+	"github.com/NezhaFan/translate-cli/model"
 )
 
 var (

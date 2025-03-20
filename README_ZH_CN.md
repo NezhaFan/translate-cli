@@ -1,19 +1,24 @@
-# Translate-Cli
 
 [English](README.md) | 中文
 
-执行命令行并对输出进行翻译
-![](demo.jpg)
+## Translate-Cli
 
-# 使用方式
-- 下载
-  - 不会`go`的，右侧`release`下载二进制文件
-  - 会`go`的 `go install github.com/NezhaFan/translate-cli@latest`
-- 本地配置环境变量（举例mac）
-  ``conf
-  export TRANSLATE_LANG=Chinese
-  export TRANSLATE_LLM_TYPE=ollama
-  export TRANSLATE_LLM_URL=https://api.openai.com
-  export TRANSLATE_LLM_MODEL=
-  export TRANSLATE_LLM_KEY=xxxx
-  ``
+执行命令并且使用大模型对输出进行翻译
+
+
+## Download
+- 从 `relase` 下载二进制程序, 重命名为 `tc`, 设置为全局环境变量
+- 或者如果你有`golang`环境直接 `go install github.com/NezhaFan/translate-cli@latest`
+
+## Config
+设置环境变量 (以mac举例)
+```conf
+export TC_LANG=Chinese #翻译后的语言
+export TC_LLM_TYPE=ollama  #非ollama可以为空
+export TC_LLM_URL=http://127.0.0.1:11434
+export TC_LLM_MODEL=qwen2.5:3b #使用较小的模型速度快
+export TC_LLM_KEY= #非ollama需要
+```
+
+## Use
+![](img/demo1.jpg)
