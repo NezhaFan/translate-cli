@@ -8,8 +8,8 @@ Execute commands and use LLM to translate output.
 
 
 ## Download
-- download program from `relase` , rename as `tc`, set as global envirenment.
-- Or if you are a gopher, just `go install github.com/NezhaFan/translate-cli@latest` and `mv $GOPATH/bin/translate-cli $GOPATH/bin/tc`
+- `go install github.com/NezhaFan/translate-cli@latest` 
+- `mv $GOPATH/bin/translate-cli $GOPATH/bin/tc`
 
 ## Config
 set env (for example in mac)
