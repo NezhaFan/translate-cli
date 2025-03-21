@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-## Translate-Cli
+## Introduction
 
 执行命令并且使用大模型对输出进行翻译
 

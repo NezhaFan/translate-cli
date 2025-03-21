@@ -1,8 +1,9 @@
 ![](img/demo1.jpg)
 
-## Translate-Cli
-
 English | [中文](README_ZH_CN.md)
+
+
+## Introduction
 
 Execute commands and use LLM to translate output.
 
