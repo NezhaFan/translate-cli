@@ -11,7 +11,7 @@ Execute commands and use LLM to translate output.
 ## Download
 - Option 1: Compile it yourself with **docker**
   - `git clone https://github.com/NezhaFan/translate-cli.git`
-  - `cd translate-cli && chmod +x && sh build.sh`
+  - `cd translate-cli && chmod +x build.sh && sh build.sh`
 - Option 2: if you r a gopher
   - `go install github.com/NezhaFan/translate-cli@latest` 
   - `mv $GOPATH/bin/translate-cli $GOPATH/bin/tc`

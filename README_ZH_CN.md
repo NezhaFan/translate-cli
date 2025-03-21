@@ -9,7 +9,7 @@
 ## Download
 - 方式一: 用Docker自己编译
   - `git clone https://github.com/NezhaFan/translate-cli.git`
-  - `cd translate-cli && chmod +x && sh build.sh`
+  - `cd translate-cli && chmod +x build.sh && sh build.sh`
 - 方式二: 你有golang环境
   - `go install github.com/NezhaFan/translate-cli@latest` 
   - `mv $GOPATH/bin/translate-cli $GOPATH/bin/tc`
