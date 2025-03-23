@@ -1,10 +1,10 @@
 package model
 
-import "fmt"
-
-var (
-	_ Model = (*Ollama)(nil)
+import (
+	"fmt"
 )
+
+var _ LLM = (*Ollama)(nil)
 
 type Ollama struct {
 	Config

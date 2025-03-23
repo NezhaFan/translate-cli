@@ -67,6 +67,5 @@ func post(c Config, content string, to any) error {
 	defer res.Body.Close()
 
 	b, _ = io.ReadAll(res.Body)
-	// fmt.Println(string(b))
 	return json.Unmarshal(b, to)
 }

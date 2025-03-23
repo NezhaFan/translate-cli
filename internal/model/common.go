@@ -2,6 +2,8 @@ package model
 
 import "fmt"
 
+var _ LLM = (*Common)(nil)
+
 type Common struct {
 	Config
 }

@@ -46,4 +46,4 @@ echo "安装到系统..."
 sudo mv ./tc /usr/local/bin/
 
 echo "构建完成！可执行文件已安装为 'tc' 命令"
-echo "现在可以直接使用 'tc curl -h' 命令了"
+echo "现在可以直接使用 'echo \"I'm just a translator\" | tc' 命令了"
