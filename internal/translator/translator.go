@@ -35,7 +35,7 @@ func parse(lines [][]byte) (notTrans []string, beforeTrans []string) {
 		if len(line) > 0 {
 			s := string(line)
 			idx := strings.LastIndex(s, "  ")
-			if idx > -1 && len(strings.Split(s[idx+1:], " ")) <= 2 {
+			if idx > -1 && len(strings.Split(s[idx:], " ")) <= 2 {
 				idx = 0
 			}
 			if idx == -1 {
@@ -43,7 +43,7 @@ func parse(lines [][]byte) (notTrans []string, beforeTrans []string) {
 			}
 			s1 := strings.TrimSpace(s[:idx])
 			notTrans = append(notTrans, s1)
-			beforeTrans = append(beforeTrans, strings.TrimSpace(s[idx+1:]))
+			beforeTrans = append(beforeTrans, strings.TrimSpace(s[idx:]))
 			if maxLen < len(s1) {
 				maxLen = len(s1)
 			}

@@ -20,11 +20,11 @@ type Config struct {
 
 func GetLLM() (LLM, error) {
 	var conf Config
-	conf.Lang = os.Getenv("TC_LANG")
-	conf.Url = os.Getenv("TC_LLM_URL")
-	conf.Model = os.Getenv("TC_LLM_MODEL")
-	conf.Key = os.Getenv("TC_LLM_KEY")
-	conf.Type = os.Getenv("TC_LLM_TYPE")
+	conf.Lang = os.Getenv("LANG")
+	conf.Url = os.Getenv("LLM_URL")
+	conf.Model = os.Getenv("LLM_MODEL")
+	conf.Key = os.Getenv("LLM_KEY")
+	conf.Type = os.Getenv("LLM_TYPE")
 	if conf.Lang == "" {
 		conf.Lang = "Chinese"
 	}

@@ -13,7 +13,6 @@ type Request struct {
 	Messages    []Message `json:"messages"`
 	Stream      bool      `json:"stream"`
 	Temperature float32   `json:"temperature"`
-	MaxTokens   uint16    `json:"max_tokens"`
 }
 
 type Message struct {
@@ -37,7 +36,7 @@ type Response2 struct {
 
 const (
 	promptSystem = "You are a professional, authentic machine translation engine."
-	promptAttach = ";; Treat next line as plain text input and translate it into %s,strictly keep \\n symbol and output translation ONLY. If translation is unnecessary (e.g. proper nouns, codes, etc.), return the original text. NO explanations. NO notes. Input:%s"
+	promptAttach = ";; Treat next line as plain text input and translate it into %s,strictly keep \\n symbol and output translation ONLY. If translation is unnecessary (e.g. proper nouns, codes, etc.), return the original text. NO explanations. NO notes. Input: %s"
 )
 
 func post(c Config, content string, to any) error {
@@ -47,7 +46,6 @@ func post(c Config, content string, to any) error {
 			{Role: "system", Content: promptSystem},
 			{Role: "user", Content: fmt.Sprintf(promptAttach, c.Lang, content)},
 		},
-		MaxTokens:   1024 * 16,
 		Temperature: 0,
 	}
 	b, _ := json.Marshal(request)
