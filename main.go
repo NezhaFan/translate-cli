@@ -29,7 +29,7 @@ func main() {
 	defer close(pipes)
 	go func() {
 		for ch := range pipes {
-			fmt.Print(<-ch)
+			fmt.Println(<-ch)
 			close(ch)
 		}
 	}()
@@ -44,7 +44,7 @@ func main() {
 
 		// 控制读取结束
 		timer := time.NewTicker(time.Millisecond * 300)
-		var lines [][]byte
+		var lines []string
 
 	Loop:
 		for {
@@ -59,7 +59,7 @@ func main() {
 					}
 					break Loop
 				}
-				lines = append(lines, line)
+				lines = append(lines, string(line))
 				length += len(line)
 				// 过长 或 8行 或 有换行间隔
 				if length > 4096 || len(lines)%8 == 0 || (len(line) == 0 && len(lines) > 0) {
@@ -80,6 +80,7 @@ func main() {
 				}
 			}
 		}
+		// 接收结束后，需要
 		if len(lines) > 0 {
 			pipes <- translator.TransAndPrint(lines, llm, wg)
 		}

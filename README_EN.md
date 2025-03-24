@@ -12,7 +12,7 @@ Execute commands and use LLM to translate output.
 - Option 1: Only use **docker**
   - `git clone https://github.com/NezhaFan/translate-cli.git`
   - `docker build -t tc .` 
-  - Set to short environment variables. for example: `alias tc='docker run --rm -i --tty=false -e LLM_TYPE=ollama -e LLM_MODEL=qwen2.5:3b -e LLM_URL=http://host.docker.internal:11434 tc'` (Tip: When you access a native address inside a container, you should use `host.docker.internal` instead of `localhost`)
+  - Set to short environment variables. for example: `alias tc='docker run --rm -i --tty=false -e LLM_URL=http://api.openai.com -e LLM_MODEL=gpt-4o -e LLM_KEY=sk-xxx tc'`
 - Option 2: Compile it yourself with **docker** (linux or mac) 
   - `git clone https://github.com/NezhaFan/translate-cli.git`
   - `cd translate-cli && chmod +x build.sh && sh build.sh`
@@ -23,15 +23,10 @@ Execute commands and use LLM to translate output.
 ## Config (When Option 2 or Option 3)
 set env (for example in mac)
 ```conf
-# tradnslated language
 export LANG=Chinese
-# ollama or empty
-export LLM_TYPE=ollama
-export LLM_URL=http://127.0.0.1:11434
-# use small model, don't use deep thinking model
-export LLM_MODEL=qwen2.5:3b
-# if not ollama it is required
-export LLM_KEY=sk-
+export LLM_URL=http://api.openai.com
+export LLM_MODEL=
+export LLM_KEY=
 ```
 
 ## Run

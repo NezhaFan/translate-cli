@@ -35,20 +35,21 @@ type Response2 struct {
 }
 
 const (
-	promptSystem = "You are a professional, authentic machine translation engine."
-	promptAttach = ";; Treat next line as plain text input and translate it into %s,strictly keep \\n symbol and output translation ONLY. If translation is unnecessary (e.g. proper nouns, codes, etc.), return the original text. NO explanations. NO notes. Input: %s"
+	promptSystem = "You are a professional programmer and translator, Treat next line as plain text input and translate it into %s,strictly keep \\n symbol and output translation ONLY. If translation is unnecessary (e.g. proper nouns, codes, etc.), return the original text. NO explanations. NO notes."
+	// promptAttach = "%s"
 )
 
 func post(c Config, content string, to any) error {
 	request := &Request{
 		Model: c.Model,
 		Messages: []Message{
-			{Role: "system", Content: promptSystem},
-			{Role: "user", Content: fmt.Sprintf(promptAttach, c.Lang, content)},
+			{Role: "system", Content: fmt.Sprintf(promptSystem, c.Lang)},
+			{Role: "user", Content: content},
 		},
 		Temperature: 0,
 	}
 	b, _ := json.Marshal(request)
+	// fmt.Println(string(b))
 	req, err := http.NewRequest(http.MethodPost, c.Url, bytes.NewReader(b))
 	if err != nil {
 		return err
