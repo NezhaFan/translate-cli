@@ -12,7 +12,7 @@ Execute commands and use LLM to translate output.
 - Option 1: Only use **docker**
   - `git clone https://github.com/NezhaFan/translate-cli.git`
   - `docker build -t tc .` 
-  - Set to short environment variables: run as a temporary container. for example: `alias tc=docker run --rm -i --tty=false -e TC_LLM_TYPE=ollama -e TC_LLM_MODEL=qwen2.5:3b -e TC_LLM_URL=http://host.docker.internal:11434 tc` (Tip: When you access a native address inside a container, you should use `host.docker.internal` instead of `localhost`)
+  - Set to short environment variables. for example: `alias tc='docker run --rm -i --tty=false -e TC_LLM_TYPE=ollama -e TC_LLM_MODEL=qwen2.5:3b -e TC_LLM_URL=http://host.docker.internal:11434 tc'` (Tip: When you access a native address inside a container, you should use `host.docker.internal` instead of `localhost`)
 - Option 2: Compile it yourself with **docker** (linux or mac) 
   - `git clone https://github.com/NezhaFan/translate-cli.git`
   - `cd translate-cli && chmod +x build.sh && sh build.sh`

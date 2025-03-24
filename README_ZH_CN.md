@@ -10,7 +10,7 @@
 - 方式一: 用Docker镜像
   - `git clone https://github.com/NezhaFan/translate-cli.git`
   - `docker build -t tc .` 
-  - 设置环境变量启动一个临时容器，举例: `alias tc=docker run --rm -i --tty=false -e TC_LLM_TYPE=ollama -e TC_LLM_MODEL=qwen2.5:3b -e TC_LLM_URL=http://host.docker.internal:11434 tc` (Tip: 注意在容器内部访问本机是 `host.docker.internal` 而不是`localhost`)
+  - 设置环境变量 `alias tc='docker run --rm -i --tty=false -e TC_LLM_TYPE=ollama -e TC_LLM_MODEL=qwen2.5:3b -e TC_LLM_URL=http://host.docker.internal:11434 tc'` (Tip: 注意在容器内部访问本机是 `host.docker.internal` 而不是`localhost`)
 - 方式二: 用Docker自己编译 (linux or mac) 
   - `git clone https://github.com/NezhaFan/translate-cli.git`
   - `cd translate-cli && chmod +x build.sh && sh build.sh`
