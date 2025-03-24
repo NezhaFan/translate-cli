@@ -14,17 +14,6 @@ import (
 
 func main() {
 
-	// for i := 1; i <= 30; i++ {
-	// 	fmt.Println("Hello, my number is " + strconv.Itoa(i))
-	// 	if i == 4 {
-	// 		time.Sleep(time.Second)
-	// 	}
-	// 	if i == 1 || i == 5 || i == 9 {
-	// 		time.Sleep(time.Second * 1)
-	// 	}
-	// }
-	// return
-
 	// 大模型
 	llm, err := model.GetLLM()
 	if err != nil {
@@ -49,6 +38,7 @@ func main() {
 	wg := &sync.WaitGroup{}
 	wg.Add(1)
 
+	var length int
 	go func() {
 		defer wg.Done()
 
@@ -70,11 +60,21 @@ func main() {
 					break Loop
 				}
 				lines = append(lines, line)
+				length += len(line)
+				// 过长 或 8行 或 有换行间隔
+				if length > 4096 || len(lines)%8 == 0 || (len(line) == 0 && len(lines) > 0) {
+					pipes <- translator.TransAndPrint(lines, llm, wg)
+					lines = lines[:0]
+					length = 0
+					timer.Stop()
+					timer = time.NewTicker(time.Millisecond * 300) // 重新计时
+				}
 			// 超时发送一次
 			case <-timer.C:
 				if len(lines) > 0 {
 					pipes <- translator.TransAndPrint(lines, llm, wg)
 					lines = lines[:0]
+					length = 0
 					timer.Stop()
 					timer = time.NewTicker(time.Millisecond * 300) // 重新计时
 				}

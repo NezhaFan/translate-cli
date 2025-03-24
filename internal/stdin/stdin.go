@@ -3,7 +3,6 @@ package stdin
 import (
 	"bufio"
 	"os"
-	"time"
 )
 
 type StdinReader struct {
@@ -24,7 +23,6 @@ func Read() *StdinReader {
 			sr.Lines <- scanner.Bytes()
 		}
 		sr.Err = scanner.Err()
-		time.Sleep(time.Millisecond * 100)
 	}()
 
 	return sr

@@ -2,9 +2,6 @@ package translator
 
 import (
 	"bytes"
-	"fmt"
-	"os"
-	"regexp"
 	"strings"
 	"sync"
 
@@ -19,54 +16,64 @@ func TransAndPrint(lines [][]byte, llm model.LLM, wg *sync.WaitGroup) chan strin
 	// 并发去翻译
 	done := make(chan string)
 	go func() {
-		afterTrans, err := llm.Translate(beforeTrans)
+		afterTrans, err := llm.Translate(strings.Join(beforeTrans, "\n"))
 		if err != nil {
-			fmt.Printf("翻译出错: %v\n", err)
-			os.Exit(1)
+			afterTrans = err.Error()
 		}
 		// 阻塞
-		done <- printLines(strLines, afterTrans)
+		done <- printLines(strLines, beforeTrans, afterTrans)
 		wg.Done()
 	}()
 
 	return done
 }
 
-var helpRegex = regexp.MustCompile(`(?m)^(\s*(?:(?:-\w+|--[\w-]+)(?:,\s*(?:-\w+|--[\w-]+))*\s*(?:<[^>]+>)?\s*)?)(.+)$`)
-
 // 解析
-func parse(lines [][]byte) (rows []string, beforeTrans string) {
-	var buff bytes.Buffer
-	buff.Grow(4096)
+func parse(lines [][]byte) (notTrans []string, beforeTrans []string) {
 	var maxLen int
 	for _, line := range lines {
-		matches := helpRegex.FindSubmatch(line)
-		if len(matches) > 2 {
-			buff.Write(matches[2])
+		if len(line) > 0 {
+			s := string(line)
+			idx := strings.LastIndex(s, "  ")
+			if idx > -1 && len(strings.Split(s[idx+1:], " ")) <= 2 {
+				idx = 0
+			}
+			if idx == -1 {
+				idx = 0
+			}
+			s1 := strings.TrimSpace(s[:idx])
+			notTrans = append(notTrans, s1)
+			beforeTrans = append(beforeTrans, strings.TrimSpace(s[idx+1:]))
+			if maxLen < len(s1) {
+				maxLen = len(s1)
+			}
+		} else {
+			notTrans = append(notTrans, "")
+			beforeTrans = append(beforeTrans, "")
 		}
-		if maxLen < len(line) {
-			maxLen = len(line)
-		}
-		buff.WriteByte('\n')
-
 	}
 
-	beforeTrans = buff.String()
-	for _, line := range lines {
-		rows = append(rows, string(line)+strings.Repeat(" ", maxLen-len(line)))
+	for i, s := range notTrans {
+		if maxLen < 60 && s != "" {
+			notTrans[i] = s + strings.Repeat(" ", maxLen-len(s))
+		}
 	}
 	return
 }
 
-func printLines(rows []string, afterTrans string) string {
+func printLines(notTrans []string, beforeTrans []string, afterTrans string) string {
 	var buff bytes.Buffer
 	buff.Grow(4096)
 	trans := strings.Split(afterTrans, "\n")
-	for i, line := range rows {
-		buff.WriteString(line)
-		buff.WriteByte('\t')
-		if i < len(trans) {
+	for i, notTran := range notTrans {
+		if len(notTran) > 0 {
+			buff.WriteString(notTran)
+			buff.WriteByte('\t')
+		}
+		if i < len(trans) && trans[i] != "" {
 			buff.WriteString(trans[i])
+		} else {
+			buff.WriteString(beforeTrans[i])
 		}
 		buff.WriteByte('\n')
 	}
